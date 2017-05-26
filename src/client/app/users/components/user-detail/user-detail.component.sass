@@ -1,0 +1,45 @@
+hr
+  height: 1px
+  background-color: #d9d9d9
+  border: 0
+  margin: 16px 0
+
+input[readonly]
+  background-color: #ddd
+  cursor: not-allowed
+
+.user-detail__form
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-between
+
+.user-detail__item
+  width: 48%
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2)
+  border-radius: 2px
+  padding: 20px
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+
+  &:nth-child(3)
+    width: 100%
+    margin-top: 40px
+
+.user-detail__item__title
+  margin: 0 0 16px
+
+.user-detail__model
+  display: flex
+  align-items: center
+
+  &:not(:last-child)
+    margin-bottom: 10px
+
+.user-detail__model__label
+  width: 30%
+
+.user-detail__actions
+  display: flex
+  flex-direction: row
+  width: 100%

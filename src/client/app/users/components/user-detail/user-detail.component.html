@@ -1,0 +1,95 @@
+<form class="user-detail__form " *ngIf="user">
+  <div class="user-detail__item">
+    <div>
+      <h3 class="user-detail__item__title">Personal Info</h3>
+
+      <hr>
+
+      <div>
+        <div class="user-detail__model" *ngFor="let property of personalProperties">
+          <label class="user-detail__model__label" [for]="property.key">{{ presenter.label(property.key) }}</label>
+          <input [id]="property.key"
+                 [name]="property.key"
+                 [(ngModel)]="user[property.key]"
+                 [readonly]="readonlyFields.includes(property.key)"
+                 required>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isUpdateOperation">
+      <hr>
+
+      <button (click)="onUpdate()">Update</button>
+    </div>
+  </div>
+
+  <div class="user-detail__item" ngModelGroup="company">
+    <div>
+      <h3 class="user-detail__item__title">Company Info</h3>
+
+      <hr>
+
+      <div>
+        <div class="user-detail__model" *ngFor="let property of companyProperties">
+          <label class="user-detail__model__label">{{ presenter.label(property.key) }}</label>
+          <input [id]="property.key"
+                 [name]="property.key"
+                 [(ngModel)]="user.company[property.key]"
+                 required>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isUpdateOperation">
+      <hr>
+
+      <button (click)="onUpdate()">Update</button>
+    </div>
+  </div>
+
+  <div class="user-detail__item" ngModelGroup="address">
+    <div>
+      <h3 class="user-detail__item__title">Location Info</h3>
+
+      <hr>
+
+      <div>
+        <div class="user-detail__model" *ngFor="let property of locationProperties">
+          <label class="user-detail__model__label">{{ presenter.label(property.key) }}</label>
+          <input [id]="property.key"
+                 [name]="property.key"
+                 [(ngModel)]="user.address[property.key]"
+                 required>
+        </div>
+      </div>
+
+      <hr>
+
+      <div>
+        <div class="user-detail__model" *ngFor="let property of locationGeoProperties">
+          <label class="user-detail__model__label">{{ presenter.label(property.key) }}</label>
+          <input [id]="property.key"
+                 [name]="property.key"
+                 [(ngModel)]="user.address.geo[property.key]"
+                 [readonly]="readonlyFields.includes(property.key)" required>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isUpdateOperation">
+      <hr>
+
+      <button (click)="onUpdate()">Update</button>
+    </div>
+
+    <sd-user-map [lat]="user.address.geo.lat"
+                 [lng]="user.address.geo.lng"
+                 (coords)="onUpdateMarketPosition($event)"></sd-user-map>
+  </div>
+
+  <div class="user-detail__item user-detail__actions">
+    <button [routerLink]="['/users']">Back</button>
+    <button *ngIf="isCreateOperation" (click)="onCreate()">Create</button>
+  </div>
+</form>

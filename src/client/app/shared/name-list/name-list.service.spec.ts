@@ -1,15 +1,15 @@
-import { BaseRequestOptions, ConnectionBackend, Http, Response, ResponseOptions } from '@angular/http';
-import { TestBed, async } from '@angular/core/testing';
-import { MockBackend } from '@angular/http/testing';
+import { BaseRequestOptions, ConnectionBackend, Http, Response, ResponseOptions } from '@angular/http'
+import { TestBed, async } from '@angular/core/testing'
+import { MockBackend } from '@angular/http/testing'
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable'
 
-import { NameListService } from './name-list.service';
+import { NameListService } from './name-list.service'
 
-export function main() {
+export function main () {
   describe('NameList Service', () => {
-    let nameListService: NameListService;
-    let mockBackend: MockBackend;
+    let nameListService: NameListService
+    let mockBackend: MockBackend
 
     beforeEach(() => {
 
@@ -21,27 +21,27 @@ export function main() {
           {
             provide: Http,
             useFactory: (backend: ConnectionBackend, options: BaseRequestOptions) => new Http(backend, options),
-            deps: [MockBackend, BaseRequestOptions]
-          }
-        ]
-      });
-    });
+            deps: [ MockBackend, BaseRequestOptions ],
+          },
+        ],
+      })
+    })
 
     it('should return an Observable when get called', async(() => {
-      expect(TestBed.get(NameListService).get()).toEqual(jasmine.any(Observable));
-    }));
+      expect(TestBed.get(NameListService).get()).toEqual(jasmine.any(Observable))
+    }))
 
     it('should resolve to list of names when get called', async(() => {
-      let nameListService = TestBed.get(NameListService);
-      let mockBackend = TestBed.get(MockBackend);
+      let nameListService = TestBed.get(NameListService)
+      let mockBackend = TestBed.get(MockBackend)
 
       mockBackend.connections.subscribe((c: any) => {
-        c.mockRespond(new Response(new ResponseOptions({ body: '["Dijkstra", "Hopper"]' })));
-      });
+        c.mockRespond(new Response(new ResponseOptions({ body: '["Dijkstra", "Hopper"]' })))
+      })
 
       nameListService.get().subscribe((data: any) => {
-        expect(data).toEqual(['Dijkstra', 'Hopper']);
-      });
-    }));
-  });
+        expect(data).toEqual([ 'Dijkstra', 'Hopper' ])
+      })
+    }))
+  })
 }

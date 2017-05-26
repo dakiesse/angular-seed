@@ -1,0 +1,23 @@
+<table class="table">
+  <tr class="table-row table-row__header">
+    <th class="table-cell">ID</th>
+    <th class="table-cell">Name</th>
+    <th class="table-cell">Email</th>
+    <th class="table-cell">Actions</th>
+  </tr>
+
+  <tr class="table-row" *ngFor="let user of users | async">
+    <td class="table-cell">{{ user.id }}</td>
+    <td class="table-cell">{{ user.username }}</td>
+    <td class="table-cell">{{ user.email }}</td>
+    <td class="table-cell">
+      <button class="btn" [routerLink]="['/users', user.id]">Edit</button>
+      |
+      <button class="btn" (click)="onRemove(user.id)">Remove</button>
+    </td>
+  </tr>
+</table>
+
+<div>
+  <button [routerLink]="['/users/new']">Create New User</button>
+</div>
